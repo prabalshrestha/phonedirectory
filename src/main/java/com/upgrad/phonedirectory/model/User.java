@@ -23,7 +23,7 @@ public class User {
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = "user", allowSetters = true)
     private List<Post> posts= new ArrayList<Post>();
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
@@ -28,8 +29,10 @@ public class PostController {
             Model model,
             HttpSession session
     ){
-        User user = (User) session.getAttribute("LoggedUser");
+        User currentUser = (User) session.getAttribute("LoggedUser");
+        User user= userService.findByUsername(currentUser.getUsername());
         List<Post> posts= user.getPosts();
+        model.addAttribute("posts", posts);
         return "dash";
     }
 
@@ -39,9 +42,21 @@ public class PostController {
             Model model,
             HttpSession session
             ){
-        User user = (User) session.getAttribute("LoggedUser");
+        User currentUser = (User) session.getAttribute("LoggedUser");
+        User user= userService.findByUsername(currentUser.getUsername());
         newPost.setUser(user);
+
         postService.addContact(newPost);
-        return "dash";
+
+        List<Post> posts= user.getPosts();
+        model.addAttribute("posts", posts);
+        return "redirect:/dash";
+    }
+
+
+    @RequestMapping(method = RequestMethod.POST, value = "/deletepost")
+    public String deletePost(@RequestParam(name = "postId") Integer postId) {
+        postService.deletePost(postId);
+        return "redirect:/dash";
     }
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1> Dashboard</h1>
-    <form method="post">
+    <form th:action="@{/dash}" method="post">
         <label>Name</label>
 
         <input type="text" name="name" id="name" required>
@@ -21,6 +21,49 @@
 
         <button type="submit">submit</button>
     </form>
+    <div class="site-blocks-table col-md-12">
+    <table class="table table-bordered" >
+        <thead >
+        <tr >
+            <th class="product-name">Name</th>
+            <th class="product-price">email</th>
+            <th class="product-quantity">Phone</th>
+            <th class="product-remove">Remove</th>
+        </tr>
+        </thead>
+
+
+        <tbody>
+        <tr th:each="posts :${posts}">
+
+            <form th:action="@{/deletepost(postId=${posts.id})}" th:method="delete">
+
+                <td class="product-name">
+                    <!--product-name -->
+                    <h2 class="h5 text-black" th:text="${posts.name}"></h2>
+                </a>
+
+                </td>
+
+                <td>
+                    <!-- Price -->
+                    <h2 class="h5 text-black" th:text="${posts.email}"></h2>
+                </td>
+                <td>
+                    <h2 class="h5 text-black" th:text="${posts.phoneNumber}"></h2>
+                </td>
+                <td>
+                    <!-- Remove -->
+                    <button type="submit" value="DELETE" >Delete</button>
+
+                </td>
+
+            </form>
+        </tr>
+        </tbody>
+
+    </table>
+    </div>
 
 </body>
 </html>
