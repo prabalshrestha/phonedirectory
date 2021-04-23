@@ -24,6 +24,9 @@ public class PostController {
     @Autowired
     private UserService userService;
 
+
+    /*DASHBOARD*/
+    /*GET*/
     @RequestMapping("/dash")
     private String dash(
             Model model,
@@ -36,6 +39,7 @@ public class PostController {
         return "dash";
     }
 
+    /*POST*/
     @RequestMapping(method = RequestMethod.POST,value = "/dash")
     private String post(
             Post newPost,
@@ -53,7 +57,7 @@ public class PostController {
         return "redirect:/dash";
     }
 
-
+    /*DELETE*/
     @RequestMapping(method = RequestMethod.POST, value = "/deletepost")
     public String deletePost(@RequestParam(name = "postId") Integer postId) {
         postService.deletePost(postId);

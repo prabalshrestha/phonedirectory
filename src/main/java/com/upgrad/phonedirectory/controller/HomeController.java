@@ -75,6 +75,8 @@ public class HomeController {
         return "login";
     }
 
+
+    /*POST*/
     @RequestMapping(method = RequestMethod.POST,value = "/login")
     private String loginValid(
             Model model,
