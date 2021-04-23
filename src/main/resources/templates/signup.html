@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+  <form method="post">
+    <label>Username</label>
+    <span style="color: red;" th:if="${usernameExists}">Username already exits.</span>
+    <input type="text" name="username" id="username" required>
+    <label>Email</label><span style="color: red;" th:if="${emailExists}">Email already exits.</span>
+    <input type="email" name="email" id="email" required>
+    <label>password</label><span style="color: red;" th:if="${passwordExists}">Choose a different Password</span>
+    <input type="password" name="password" id="password" required>
+    <label>PhoneNumber</label><span style="color: red;" th:if="${phoneNumberExists}">PhoneNumber already exits.</span>
+    <input type="text" name="phoneNumber" id="phoneNumber" required>
+    <button type="submit">SignUp</button>
+
+
+  </form>
+</body>
+</html>
